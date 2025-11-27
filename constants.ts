@@ -18,12 +18,12 @@ export const MUSIC_PLAYLIST = [
   
   // --- NHẠC CỦA BẠN ---
   // Đường dẫn: music/tenbaihat.mp3
-  "/music/$osaaaaaa.mp3",
-  "/music/29C219M1.mp3",
-  "/music/bontaoghetto.mp3",
-  "/music/hatbuinaohoakiepthantoi.mp3",
-  "/music/kakaka.mp3",
-  "/music/ponobrrrbrrr.mp3"
+  `${import.meta.env.BASE_URL}music/$osaaaaaa.mp3`,
+  `${import.meta.env.BASE_URL}music/29C219M1.mp3`,
+  `${import.meta.env.BASE_URL}music/bontaoghetto.mp3`,
+  `${import.meta.env.BASE_URL}music/hatbuinaohoakiepthantoi.mp3`,
+  `${import.meta.env.BASE_URL}music/kakaka.mp3`,
+  `${import.meta.env.BASE_URL}music/ponobrrrbrrr.mp3`,
 ];
 
 // 1. CÁC LOẠI VỎ CHOCOBOMB (SHELLS)

@@ -10,5 +10,5 @@ export default defineConfig({
   // 1. Chạy trên GitHub Pages OK
   // 2. Chạy trên Vercel/Netlify OK
   // 3. Mở file index.html trực tiếp trên máy cũng OK
-  base: './', 
+  base: '/chocobomb-xmas/', 
 });
