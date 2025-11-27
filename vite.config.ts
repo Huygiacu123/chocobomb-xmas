@@ -5,10 +5,10 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   
-  // --- CẤU HÌNH QUAN TRỌNG ĐỂ UPLOAD LÊN GITHUB ---
-  // Thay đổi dòng dưới đây thành tên Repository bạn vừa tạo trên GitHub.
-  // Ví dụ: Nếu bạn đặt tên repo là "tiem-chocobomb", hãy sửa thành: base: '/tiem-chocobomb/',
-  // Nhớ có dấu gạch chéo / ở đầu và cuối.
-  
-  base: '/chocobomb-xmas/', 
+  // --- CẤU HÌNH QUAN TRỌNG ---
+  // Sử dụng './' (đường dẫn tương đối) giúp web chạy được ở mọi nơi:
+  // 1. Chạy trên GitHub Pages OK
+  // 2. Chạy trên Vercel/Netlify OK
+  // 3. Mở file index.html trực tiếp trên máy cũng OK
+  base: './', 
 });

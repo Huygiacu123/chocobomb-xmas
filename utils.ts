@@ -1,7 +1,7 @@
 
 /**
- * Hàm này giúp sửa đường dẫn ảnh để chạy đúng trên cả Local và GitHub Pages
- * Nó sẽ tự động thêm Base URL (ví dụ: /chocobomb-max/) vào trước tên file
+ * Hàm này giúp sửa đường dẫn ảnh để chạy đúng trên cả Local, GitHub Pages và Vercel
+ * Khi dùng base: './' trong vite.config.ts, import.meta.env.BASE_URL sẽ là './'
  */
 export const resolvePath = (path: string | undefined) => {
   if (!path) return '';
@@ -11,14 +11,19 @@ export const resolvePath = (path: string | undefined) => {
     return path;
   }
 
-  // Lấy Base URL từ cấu hình vite.config.ts
-  const baseUrl = import.meta.env.BASE_URL;
+  // Lấy Base URL từ cấu hình vite.config.ts (sẽ là './')
+  let baseUrl = import.meta.env.BASE_URL;
+  
+  // Đảm bảo baseUrl luôn kết thúc bằng /
+  if (!baseUrl.endsWith('/')) {
+    baseUrl += '/';
+  }
 
-  // Xóa dấu gạch chéo hoặc chấm ở đầu path nếu có (để tránh bị double slash //)
+  // Xóa dấu gạch chéo hoặc chấm ở đầu path input nếu có
   // Ví dụ: ./images/a.jpg -> images/a.jpg
   //       /images/a.jpg -> images/a.jpg
   const cleanPath = path.replace(/^(\.\/|\/)/, '');
 
-  // Nối chuỗi: /chocobomb-max/ + images/a.jpg
+  // Kết quả sẽ là: ./images/a.jpg
   return `${baseUrl}${cleanPath}`;
 };

@@ -16,8 +16,8 @@ export const MUSIC_PLAYLIST = [
   // Link nhạc mẫu online ổn định (để test)
   // "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3",
   
-  // --- NHẠC CỦA BẠN (Bỏ comment khi đã copy file vào thư mục public/music) ---
-  // Lưu ý: Đường dẫn không cần dấu ./ hay / ở đầu
+  // --- NHẠC CỦA BẠN ---
+  // Đường dẫn: music/tenbaihat.mp3
   "music/$osaaaaaa.mp3",
   "music/29C219M1.mp3",
   "music/bontaoghetto.mp3",
@@ -54,7 +54,7 @@ export const POWDERS: BaseOption[] = [
     id: 'milo',
     name: 'Bột Milo',
     description: 'Vị cacao lúa mạch quen thuộc',
-    // Lưu ý: Chỉ cần ghi images/tenfile.jpg (không cần ./ hay /)
+    // Chỉ ghi: folder/tenfile.jpg (không có dấu / ở đầu)
     image: 'images/milobot.jpg', 
     color: '#8D6E63' 
   },
