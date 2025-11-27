@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tiệm Bánh Dream Cake</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Quicksand', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                50: '#fdf2f8',
+                100: '#fce7f3',
+                200: '#fbcfe8',
+                300: '#f9a8d4',
+                400: '#f472b6',
+                500: '#ec4899', // Pink branding
+                600: '#db2777',
+                800: '#9d174d',
+              },
+              cream: '#FFFDD0',
+              cocoa: '#5D4037',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #fdf2f8;
+        background-image: radial-gradient(#fbcfe8 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #f9a8d4; 
+        border-radius: 4px;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "uuid": "https://aistudiocdn.com/uuid@^13.0.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24",
+    "clsx": "https://aistudiocdn.com/clsx@^2.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "vite": "https://aistudiocdn.com/vite@^7.2.4",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
