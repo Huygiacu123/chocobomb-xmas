@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { BaseOption } from '../types';
 import { motion } from 'framer-motion';
-import { Check, Plus, ImageOff } from 'lucide-react';
+import { Check, Plus, ImageOff, AlertCircle } from 'lucide-react';
 import clsx from 'clsx';
 import { resolvePath } from '../utils';
 
@@ -25,20 +26,32 @@ export const OptionList: React.FC<OptionListProps> = ({
   const renderThumbnail = (option: BaseOption) => {
     // 1. Nếu có Ảnh (Dùng cho Bột & Trang trí), ưu tiên render Ảnh
     if (option.image) {
+      const imgSrc = resolvePath(option.image);
       return (
-        <div className="w-full h-full bg-gray-50 flex items-center justify-center overflow-hidden">
+        <div className="w-full h-full bg-gray-50 flex items-center justify-center overflow-hidden relative group-thumbnail">
           <img 
-            src={resolvePath(option.image)} 
+            src={imgSrc} 
             alt={option.name} 
             className="w-full h-full object-cover"
             onError={(e) => {
-              // Xử lý khi ảnh lỗi (chưa chép file vào)
+              // Ẩn ảnh lỗi
               e.currentTarget.style.display = 'none';
-              // Hiển thị icon lỗi tạm thời
+              // Hiển thị thông báo lỗi text ngay tại chỗ
+              const errSpan = e.currentTarget.parentElement?.querySelector('.error-msg') as HTMLElement;
+              if (errSpan) errSpan.style.display = 'flex';
             }}
           />
+          
+          {/* Thông báo lỗi hiển thị khi ảnh chết */}
+          <div className="error-msg hidden absolute inset-0 bg-red-50 flex-col items-center justify-center text-center p-1">
+             <AlertCircle size={16} className="text-red-500 mb-1" />
+             <span className="text-[8px] text-red-600 leading-tight break-all">
+               Lỗi: {option.image}
+             </span>
+          </div>
+
           {/* Fallback hiển thị dưới ảnh nếu ảnh lỗi (do ảnh che mất nếu load đc) */}
-          <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+          <div className="absolute inset-0 flex items-center justify-center text-gray-400 -z-10">
              <ImageOff size={16} />
           </div>
         </div>

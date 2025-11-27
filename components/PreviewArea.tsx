@@ -1,7 +1,8 @@
+
 import React, { useMemo } from 'react';
 import { CakeState, StepType } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, AlertCircle } from 'lucide-react';
 import { resolvePath } from '../utils';
 
 interface PreviewAreaProps {
@@ -21,7 +22,6 @@ export const PreviewArea: React.FC<PreviewAreaProps> = ({
   const showLid = currentStep === StepType.COATING || currentStep === StepType.DECOR || currentStep === StepType.FINISH;
 
   // Tính toán vị trí ngẫu nhiên cho các viên nhân (Core Items)
-  // Chỉ tính lại khi loại nhân thay đổi
   const coreItems = useMemo(() => {
     if (!cakeState.core) return [];
     
@@ -31,15 +31,12 @@ export const PreviewArea: React.FC<PreviewAreaProps> = ({
     const radius = 60; // Bán kính rải nhân (nhỏ lại để nằm gọn trong vỏ)
 
     for (let i = 0; i < count; i++) {
-        // Tạo tọa độ polar ngẫu nhiên
         const r = Math.sqrt(Math.random()) * radius;
         const theta = Math.random() * 2 * Math.PI;
         
-        // Chuyển sang Cartesian
         const x = r * Math.cos(theta);
         const y = r * Math.sin(theta);
         
-        // Random rotation và scale nhẹ
         const rotate = Math.random() * 360;
         const scale = 0.8 + Math.random() * 0.4; // 0.8 -> 1.2
         
@@ -83,7 +80,7 @@ export const PreviewArea: React.FC<PreviewAreaProps> = ({
         </AnimatePresence>
 
         {/* Layer 2: Bột (Powder) */}
-        {/* QUAN TRỌNG: LUÔN DÙNG CSS, KHÔNG RENDER <img> CHO BỘT NỮA */}
+        {/* Force CSS rendering for animation consistency */}
         <AnimatePresence mode="wait">
           {cakeState.powder && (
             <motion.div
@@ -109,7 +106,7 @@ export const PreviewArea: React.FC<PreviewAreaProps> = ({
         </AnimatePresence>
 
         {/* Layer 3: Nhân (Core) */}
-        {/* QUAN TRỌNG: LUÔN DÙNG CSS, KHÔNG RENDER <img> CHO NHÂN NỮA */}
+        {/* Force CSS rendering but with large items */}
         <AnimatePresence mode="wait">
           {cakeState.core && (
             <motion.div 
@@ -149,7 +146,7 @@ export const PreviewArea: React.FC<PreviewAreaProps> = ({
           )}
         </AnimatePresence>
 
-        {/* Layer 4: Nắp Bánh (Lid) - Đậy lại khi chuyển sang bước Coating/Decor */}
+        {/* Layer 4: Nắp Bánh (Lid) */}
         <AnimatePresence>
           {showLid && cakeState.shell && (
             <motion.div
@@ -187,7 +184,6 @@ export const PreviewArea: React.FC<PreviewAreaProps> = ({
               transition={{ delay: 0.3 }}
               className="absolute inset-0 z-40 pointer-events-none flex items-center justify-center"
             >
-               {/* Vẽ đường Ziczac bằng SVG */}
                <svg viewBox="0 0 100 100" className="w-[110%] h-[110%] drop-shadow-md">
                   <path 
                     d="M 10 20 Q 20 10, 30 20 T 50 20 T 70 20 T 90 20
@@ -205,13 +201,12 @@ export const PreviewArea: React.FC<PreviewAreaProps> = ({
           )}
         </AnimatePresence>
 
-        {/* Layer 6: Trang Trí (Decorations) - Kéo thả */}
+        {/* Layer 6: Trang Trí (Decorations) */}
         {showLid && cakeState.decorations.map((decor) => (
           <motion.div
             key={decor.uniqueId}
             drag={isDecorMode}
             dragMomentum={false}
-            // Giới hạn vùng kéo
             dragConstraints={{ left: -140, right: 140, top: -140, bottom: 140 }}
             whileHover={isDecorMode ? { scale: 1.1, cursor: 'grab' } : {}}
             whileTap={isDecorMode ? { scale: 0.95, cursor: 'grabbing' } : {}}
@@ -219,11 +214,10 @@ export const PreviewArea: React.FC<PreviewAreaProps> = ({
             animate={{ scale: 1, x: decor.x, y: decor.y }}
             className="absolute top-1/2 left-1/2 w-12 h-12 -ml-6 -mt-6 z-50 flex items-center justify-center"
           >
-            {/* Hiển thị nút xóa khi hover */}
             {isDecorMode && (
               <button 
                 onClick={(e) => {
-                  e.stopPropagation(); // Ngừng lan truyền sự kiện để không kích hoạt drag
+                  e.stopPropagation();
                   onRemoveDecor(decor.uniqueId);
                 }}
                 className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 shadow-sm opacity-0 hover:opacity-100 transition-opacity z-50"
@@ -234,13 +228,24 @@ export const PreviewArea: React.FC<PreviewAreaProps> = ({
 
             {/* Render hình ảnh Decor */}
             {decor.image ? (
-              <img 
-                src={resolvePath(decor.image)} 
-                alt={decor.name} 
-                className="w-full h-full object-contain drop-shadow-md pointer-events-none select-none"
-              />
+               // Wrapper để hiển thị lỗi nếu ảnh chết
+               <div className="w-full h-full relative">
+                  <img 
+                    src={resolvePath(decor.image)} 
+                    alt={decor.name} 
+                    className="w-full h-full object-contain drop-shadow-md pointer-events-none select-none"
+                    onError={(e) => {
+                       e.currentTarget.style.display = 'none';
+                       // Hiện thông báo lỗi thay thế
+                       const err = e.currentTarget.parentElement?.querySelector('.decor-error') as HTMLElement;
+                       if (err) err.style.display = 'flex';
+                    }}
+                  />
+                  <div className="decor-error hidden absolute inset-0 bg-red-100 border border-red-500 rounded-full flex items-center justify-center">
+                    <AlertCircle size={16} className="text-red-500"/>
+                  </div>
+               </div>
             ) : (
-              // Fallback nếu không có ảnh (dùng icon)
               decor.icon && React.createElement(decor.icon, { 
                 size: 32, 
                 color: decor.color, 
