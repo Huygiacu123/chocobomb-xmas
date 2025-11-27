@@ -208,11 +208,6 @@ export const PreviewArea: React.FC<PreviewAreaProps> = ({
             drag={isDecorMode}
             dragMomentum={false}
             dragConstraints={{ left: -140, right: 140, top: -140, bottom: 140 }}
-            onDragEnd={(e, info) => {
-                // Cập nhật vị trí mới vào state khi thả chuột ra
-                // Lấy vị trí cũ + quãng đường vừa kéo
-                onUpdateDecorPosition(decor.uniqueId, decor.x + info.offset.x, decor.y + info.offset.y);
-            }}
             whileHover={isDecorMode ? { scale: 1.1, cursor: 'grab' } : {}}
             whileTap={isDecorMode ? { scale: 0.95, cursor: 'grabbing' } : {}}
             initial={{ scale: 0, x: decor.x, y: decor.y }}
@@ -225,10 +220,9 @@ export const PreviewArea: React.FC<PreviewAreaProps> = ({
                   e.stopPropagation();
                   onRemoveDecor(decor.uniqueId);
                 }}
-                className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full p-1.5 shadow-md z-50 cursor-pointer hover:bg-red-600 transition-colors"
-                title="Xóa trang trí này"
+                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 shadow-sm opacity-0 hover:opacity-100 transition-opacity z-50"
               >
-                <X size={14} />
+                <X size={10} />
               </button>
             )}
 
