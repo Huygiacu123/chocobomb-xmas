@@ -18,12 +18,12 @@ export const MUSIC_PLAYLIST = [
   
   // --- NHẠC CỦA BẠN ---
   // Đường dẫn: music/tenbaihat.mp3
-  "music/$osaaaaaa.mp3",
-  "music/29C219M1.mp3",
-  "music/bontaoghetto.mp3",
-  "music/hatbuinaohoakiepthantoi.mp3",
-  "music/kakaka.mp3",
-  "music/ponobrrrbrrr.mp3"
+  "/music/$osaaaaaa.mp3",
+  "/music/29C219M1.mp3",
+  "/music/bontaoghetto.mp3",
+  "/music/hatbuinaohoakiepthantoi.mp3",
+  "/music/kakaka.mp3",
+  "/music/ponobrrrbrrr.mp3"
 ];
 
 // 1. CÁC LOẠI VỎ CHOCOBOMB (SHELLS)
@@ -55,14 +55,14 @@ export const POWDERS: BaseOption[] = [
     name: 'Bột Milo',
     description: 'Vị cacao lúa mạch quen thuộc',
     // Chỉ ghi: folder/tenfile.jpg (không có dấu / ở đầu)
-    image: 'images/milobot.jpg', 
+    image: '/images/milobot.jpg', 
     color: '#8D6E63' 
   },
   {
     id: 'coffee',
     name: 'Bột Cà Phê',
     description: 'Hương vị cà phê sữa',
-    image: 'images/cafebot.jpg', 
+    image: '/images/cafebot.jpg', 
     color: '#6D4C41'
   }
 ];
@@ -73,14 +73,14 @@ export const CORES: BaseOption[] = [
     id: 'milo_ball',
     name: 'Viên Milo Tròn',
     description: 'Giòn tan đậm đà',
-    image: 'images/milovien.jpg', 
+    image: '/images/milovien.jpg', 
     color: '#3E2723' 
   },
   {
     id: 'marshmallow',
     name: 'Kẹo Dẻo',
     description: 'Marshmallow trắng mềm mịn',
-    image: 'images/marshmallow.jpg', 
+    image: '/images/marshmallow.jpg', 
     color: '#FFF9C4' 
   }
 ];
@@ -112,63 +112,63 @@ export const DECORATIONS: BaseOption[] = [
   {
     id: 'star1',
     name: 'Ngôi Sao Vàng',
-    image: 'images/ngoisaovang.png',
+    image: '/images/ngoisaovang.png',
     icon: Star,
     color: '#FFD700'
   },
   {
     id: 'pine1',
     name: 'Cây Thông 1',
-    image: 'images/caythong1.png',
+    image: '/images/caythong1.png',
     icon: Cloud,
     color: '#2E7D32'
   },
   {
     id: 'pine2',
     name: 'Cây Thông 2',
-    image: 'images/caythong2.png',
+    image: '/images/caythong2.png',
     icon: Cloud,
     color: '#2E7D32'
   },
   {
     id: 'sprinkles1',
     name: 'Cốm Mix 1',
-    image: 'images/mix1.png',
+    image: '/images/mix1.png',
     icon: Sparkles,
     color: '#FF4081'
   },
   {
     id: 'sprinkles2',
     name: 'Cốm Mix 2',
-    image: 'images/mix2.png',
+    image: '/images/mix2.png',
     icon: Sparkles,
     color: '#F44336'
   },
   {
     id: 'heart',
     name: 'Trái Tim',
-    image: 'images/traitim.png',
+    image: '/images/traitim.png',
     icon: Heart,
     color: '#F44336'
   },
   {
     id: 'ball',
     name: 'Quả Cầu 1',
-    image: 'images/quacau1.png',
+    image: '/images/quacau1.png',
     icon: Heart,
     color: '#F44336'
   },
   {
     id: 'ball2',
     name: 'Quả Cầu 2',
-    image: 'images/quacau2.png',
+    image: '/images/quacau2.png',
     icon: Heart,
     color: '#F44336'
   },
   {
     id: 'round',
     name: 'Hình Tròn',
-    image: 'images/hinhtron.png',
+    image: '/images/hinhtron.png',
     icon: Heart,
     color: '#F44336'
   }
