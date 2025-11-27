@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid'; // Actually we don't have uuid lib, use simple generator
@@ -80,9 +81,13 @@ function App() {
   };
 
   const handleUpdateDecorPosition = (id: string, x: number, y: number) => {
-    // Note: Framer motion handles visual drag. 
-    // If we wanted to save exact coords for persistence we would update here.
-    // For this simple app, we update state only if needed for saving later.
+    // Cập nhật vị trí mới vào danh sách trang trí
+    setCakeState(prev => ({
+      ...prev,
+      decorations: prev.decorations.map(d => 
+        d.uniqueId === id ? { ...d, x, y } : d
+      )
+    }));
   };
 
   const handleRemoveDecor = (id: string) => {
